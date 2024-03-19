@@ -1,29 +1,35 @@
-// 監聽拖動事件
 document.addEventListener('DOMContentLoaded', function() {
-    let dragItem = null;
+    const tiles = document.querySelectorAll('.tile');
 
-    // 設置拖動開始事件
-    document.addEventListener('dragstart', function(event) {
-        dragItem = event.target;
-        event.dataTransfer.setData('text/plain', null);
+    tiles.forEach(tile => {
+        tile.addEventListener('dragstart', dragStart);
+        tile.addEventListener('dragend', dragEnd);
     });
 
-    // 設置放置事件
-    document.addEventListener('dragover', function(event) {
+    function dragStart(event) {
+        this.classList.add('dragging');
+    }
+
+    function dragEnd(event) {
+        this.classList.remove('dragging');
+    }
+
+    const board = document.getElementById('board');
+
+    board.addEventListener('dragover', dragOver);
+    board.addEventListener('drop', drop);
+
+    function dragOver(event) {
         event.preventDefault();
-    });
+    }
 
-    // 設置放置目標事件
-    document.addEventListener('drop', function(event) {
-        if (dragItem) {
-            event.preventDefault();
-            let x = event.clientX - dragItem.offsetWidth / 2;
-            let y = event.clientY - dragItem.offsetHeight / 2;
-            dragItem.style.position = 'absolute';
-            dragItem.style.left = x + 'px';
-            dragItem.style.top = y + 'px';
-            dragItem = null;
-        }
-    });
+    function drop(event) {
+        event.preventDefault();
+        const tile = document.querySelector('.dragging');
+        const rect = board.getBoundingClientRect();
+        const offsetX = event.clientX - rect.left - tile.offsetWidth / 2;
+        const offsetY = event.clientY - rect.top - tile.offsetHeight / 2;
+        tile.style.left = offsetX + 'px';
+        tile.style.top = offsetY + 'px';
+    }
 });
-
