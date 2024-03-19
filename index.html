@@ -17,6 +17,10 @@
             cursor: move;
         }
 
+        .dragging {
+            cursor: grabbing;
+        }
+
         #tile1 {
             width: 200px;
             height: 200px;
@@ -26,75 +30,29 @@
             left: 150px;
         }
 
-        #tile2 {
-            width: 100px;
-            height: 200px;
-            background-color: #FFB266;
-            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-            top: 200px;
-            left: 0;
+        /* Add styles for other tiles here */
+
+        /* Add styles for flip or rotate effect */
+        .flipped {
+            transform: scaleX(-1);
         }
 
-        #tile3 {
-            width: 100px;
-            height: 100px;
-            background-color: #FFFF66;
-            clip-path: polygon(0% 0%, 100% 0%, 100% 100%);
-            top: 200px;
-            left: 100px;
-        }
-
-        #tile4 {
-            width: 200px;
-            height: 100px;
-            background-color: #66FF66;
-            clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
-            top: 200px;
-            left: 200px;
-        }
-
-        #tile5 {
-            width: 200px;
-            height: 100px;
-            background-color: #6666FF;
-            clip-path: polygon(0% 0%, 50% 0%, 0% 100%);
-            top: 100px;
-            left: 200px;
-        }
-
-        #tile6 {
-            width: 100px;
-            height: 100px;
-            background-color: #B266FF;
-            clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
-            top: 100px;
-            left: 100px;
-        }
-
-        #tile7 {
-            width: 100px;
-            height: 100px;
-            background-color: #FF66FF;
-            clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
-            top: 100px;
-            left: 200px;
+        .rotated {
+            transform: rotate(45deg);
         }
     </style>
 </head>
 <body>
     <div id="board">
         <div class="tile" id="tile1" draggable="true"></div>
-        <div class="tile" id="tile2" draggable="true"></div>
-        <div class="tile" id="tile3" draggable="true"></div>
-        <div class="tile" id="tile4" draggable="true"></div>
-        <div class="tile" id="tile5" draggable="true"></div>
-        <div class="tile" id="tile6" draggable="true"></div>
-        <div class="tile" id="tile7" draggable="true"></div>
+        <!-- Add other tiles here -->
     </div>
     <script>
         document.querySelectorAll('.tile').forEach(tile => {
             tile.addEventListener('dragstart', dragStart);
             tile.addEventListener('dragend', dragEnd);
+            tile.addEventListener('click', toggleFlip);
+            tile.addEventListener('dblclick', toggleRotate);
         });
 
         function dragStart(event) {
@@ -103,6 +61,14 @@
 
         function dragEnd(event) {
             this.classList.remove('dragging');
+        }
+
+        function toggleFlip(event) {
+            this.classList.toggle('flipped');
+        }
+
+        function toggleRotate(event) {
+            this.classList.toggle('rotated');
         }
 
         const board = document.getElementById('board');
