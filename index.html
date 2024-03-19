@@ -4,18 +4,125 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tangram Game</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        #board {
+            width: 400px;
+            height: 400px;
+            border: 2px solid black;
+            position: relative;
+        }
+
+        .tile {
+            position: absolute;
+            cursor: move;
+        }
+
+        #tile1 {
+            width: 200px;
+            height: 200px;
+            background-color: #FF6666;
+            clip-path: polygon(50% 0%, 0% 50%, 100% 50%);
+            top: 0;
+            left: 150px;
+        }
+
+        #tile2 {
+            width: 100px;
+            height: 200px;
+            background-color: #FFB266;
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+            top: 200px;
+            left: 0;
+        }
+
+        #tile3 {
+            width: 100px;
+            height: 100px;
+            background-color: #FFFF66;
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%);
+            top: 200px;
+            left: 100px;
+        }
+
+        #tile4 {
+            width: 200px;
+            height: 100px;
+            background-color: #66FF66;
+            clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+            top: 200px;
+            left: 200px;
+        }
+
+        #tile5 {
+            width: 200px;
+            height: 100px;
+            background-color: #6666FF;
+            clip-path: polygon(0% 0%, 50% 0%, 0% 100%);
+            top: 100px;
+            left: 200px;
+        }
+
+        #tile6 {
+            width: 100px;
+            height: 100px;
+            background-color: #B266FF;
+            clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+            top: 100px;
+            left: 100px;
+        }
+
+        #tile7 {
+            width: 100px;
+            height: 100px;
+            background-color: #FF66FF;
+            clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+            top: 100px;
+            left: 200px;
+        }
+    </style>
 </head>
 <body>
     <div id="board">
-        <div class="tile" id="tile1"></div>
-        <div class="tile" id="tile2"></div>
-        <div class="tile" id="tile3"></div>
-        <div class="tile" id="tile4"></div>
-        <div class="tile" id="tile5"></div>
-        <div class="tile" id="tile6"></div>
-        <div class="tile" id="tile7"></div>
+        <div class="tile" id="tile1" draggable="true"></div>
+        <div class="tile" id="tile2" draggable="true"></div>
+        <div class="tile" id="tile3" draggable="true"></div>
+        <div class="tile" id="tile4" draggable="true"></div>
+        <div class="tile" id="tile5" draggable="true"></div>
+        <div class="tile" id="tile6" draggable="true"></div>
+        <div class="tile" id="tile7" draggable="true"></div>
     </div>
-    <script src="script.js"></script>
+    <script>
+        document.querySelectorAll('.tile').forEach(tile => {
+            tile.addEventListener('dragstart', dragStart);
+            tile.addEventListener('dragend', dragEnd);
+        });
+
+        function dragStart(event) {
+            this.classList.add('dragging');
+        }
+
+        function dragEnd(event) {
+            this.classList.remove('dragging');
+        }
+
+        const board = document.getElementById('board');
+
+        board.addEventListener('dragover', dragOver);
+        board.addEventListener('drop', drop);
+
+        function dragOver(event) {
+            event.preventDefault();
+        }
+
+        function drop(event) {
+            event.preventDefault();
+            const tile = document.querySelector('.dragging');
+            const rect = board.getBoundingClientRect();
+            const offsetX = event.clientX - rect.left - tile.offsetWidth / 2;
+            const offsetY = event.clientY - rect.top - tile.offsetHeight / 2;
+            tile.style.left = offsetX + 'px';
+            tile.style.top = offsetY + 'px';
+        }
+    </script>
 </body>
 </html>
