@@ -14,47 +14,47 @@
     width: 200px;
     height: 200px;
     background-color: #FF6666;
-    clip-path: polygon(50% 0, 0 50%, 50% 100%, 100% 50%);
+    clip-path: polygon(50% 0%, 0% 50%, 100% 50%);
 }
 
 #tile2 {
     width: 200px;
-    height: 200px;
+    height: 100px;
     background-color: #FFB266;
-    clip-path: polygon(0 0, 0 50%, 50% 50%);
+    clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 0% 100%);
 }
 
 #tile3 {
     width: 200px;
-    height: 200px;
+    height: 100px;
     background-color: #FFFF66;
-    clip-path: polygon(50% 0, 0 50%, 100% 50%);
+    clip-path: polygon(50% 0%, 0% 0%, 0% 100%, 100% 100%);
 }
 
 #tile4 {
     width: 100px;
     height: 100px;
     background-color: #66FF66;
-    clip-path: polygon(0 0, 100% 0, 100% 100%);
+    clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
 }
 
 #tile5 {
     width: 100px;
     height: 100px;
     background-color: #6666FF;
-    clip-path: polygon(0 0, 50% 0, 0 50%);
+    clip-path: polygon(0% 0%, 50% 0%, 0% 100%);
 }
 
 #tile6 {
     width: 100px;
     height: 100px;
     background-color: #B266FF;
-    clip-path: polygon(0 0, 100% 50%, 0 100%);
+    clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
 }
 
 #tile7 {
     width: 100px;
     height: 100px;
     background-color: #FF66FF;
-    clip-path: polygon(0 50%, 50% 0, 100% 50%);
+    clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
 }
