@@ -1,26 +1,29 @@
-// 七巧板單元的形狀和顏色
-const pieces = [
-    { id: 1, shape: 'square', color: 'red' },
-    { id: 2, shape: 'triangle', color: 'blue' },
-    // 添加更多七巧板單元...
-];
+// 監聽拖動事件
+document.addEventListener('DOMContentLoaded', function() {
+    let dragItem = null;
 
-// 在棋盤上生成七巧板單元
-function createPieces() {
-    const board = document.getElementById('board');
-    pieces.forEach(piece => {
-        const tile = document.createElement('div');
-        tile.classList.add('tile');
-        tile.dataset.id = piece.id;
-        tile.style.backgroundColor = piece.color;
-        board.appendChild(tile);
+    // 設置拖動開始事件
+    document.addEventListener('dragstart', function(event) {
+        dragItem = event.target;
+        event.dataTransfer.setData('text/plain', null);
     });
-}
 
-// 初始化遊戲
-function initGame() {
-    createPieces();
-}
+    // 設置放置事件
+    document.addEventListener('dragover', function(event) {
+        event.preventDefault();
+    });
 
-// 開始遊戲
-initGame();
+    // 設置放置目標事件
+    document.addEventListener('drop', function(event) {
+        if (dragItem) {
+            event.preventDefault();
+            let x = event.clientX - dragItem.offsetWidth / 2;
+            let y = event.clientY - dragItem.offsetHeight / 2;
+            dragItem.style.position = 'absolute';
+            dragItem.style.left = x + 'px';
+            dragItem.style.top = y + 'px';
+            dragItem = null;
+        }
+    });
+});
+
