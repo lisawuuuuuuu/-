@@ -21,23 +21,12 @@
             cursor: grabbing;
         }
 
-        #tile1 {
-            width: 200px;
-            height: 200px;
-            background-color: #FF6666;
-            clip-path: polygon(50% 0%, 0% 50%, 100% 50%);
-            top: 0;
-            left: 150px;
-        }
-
-        /* Add styles for other tiles here */
-
-        /* Add styles for flip or rotate effect */
         .flipped {
             transform: scaleX(-1);
         }
 
         .rotated {
+            transform-origin: center center;
             transform: rotate(45deg);
         }
     </style>
